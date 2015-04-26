@@ -10,8 +10,8 @@ $(document).ready(function(){
  
     // Initialize Google Maps
      var mapOptions = {
-      center: { lat: -34.397, lng: 150.644},
-      zoom: 8,
+      center: { lat: 34.069117, lng: -118.445170},
+      zoom: 15,
       disableDefaultUI: true,
       zoomControl: true,
       zoomControlOptions: {
@@ -20,14 +20,17 @@ $(document).ready(function(){
       scrollwheel: false
     };
     var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+  
         
         
         
     var mapDiv = $("#map-canvas");
     var header = $('header');
     var container = $('#container');
+
     $(window).scroll(function() {
-      if( $(this).scrollTop() > header.height() ) {
+      // Todo: account for margins
+      if( $(this).scrollTop() > header.height() + header.padding('top') + header.padding('bottom')) {
         mapDiv.css({
             "position": "fixed",
             "left": "0px",
@@ -94,4 +97,26 @@ function modifyData(places) {
            place['LatLng'] = results[0].geometry.location;
         });
     });  
+}
+
+
+// Jquery plugin
+//   Returns the padding in px as an integer
+$.fn.padding = function (direction) {
+    
+    var padding = this.css("padding-" + direction);
+    var num = padding.match(/[0-9]+/)[0];
+    var unit = padding.match(/[a-zA-Z]+/)[0];
+    
+    // No padding
+    if (num === "") {
+        return 0;
+    }
+    
+    if (unit === "px") {
+        return parseInt(num);
+    }
+    else {
+        // do unit conversion from em to px...
+    }
 }
