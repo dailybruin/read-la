@@ -1,12 +1,21 @@
+
 #feature-head {
-    text-align: center;
     background-color: black;  /* khaki */
     color: snow;
     box-sizing-border-sizing: border-box;
     margin: 0;
-    padding-top: 50px;
+    padding: 30px;
     overflow: hidden;
     min-height: 100%;
+}
+
+p {
+    font: 1em "Century Gothic";
+}
+
+h1 {
+    font: bold 80px "Calibri", Helvetica, Arial, sans-serif;
+    text-align: center;
 }
 
 body {
@@ -45,6 +54,11 @@ body {
 .place img {
     width: 100%;
     max-width: 100%;
+}
+
+.place h2 {
+    font: bold 2em "Calibri", Helvetica, Arial, sans-serif;
+
 }
 
 
