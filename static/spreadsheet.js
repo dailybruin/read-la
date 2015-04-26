@@ -20,7 +20,7 @@ $(document).ready(function(){
       scrollwheel: false
     };
     var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
-  
+    map.panBy(-200, 0);
         
         
         

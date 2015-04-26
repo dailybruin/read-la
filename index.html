@@ -26,11 +26,11 @@
                     <p>
                         <%= row.paragraphs %>
                     </p>
-                    <p>
-                        <% _.each(row.images, function(image) { %>
-                            <%= image %>
-                        <% }); %>
-                    </p>
+                    <div class="place-img">
+                    <% _.each(row.images, function(image) { %>
+                        <img src="<%= image %>"</img>
+                    <% }); %>
+                    </div>
                     <p>
                         Address: <%= row.address %>
                     </p>                    

@@ -27,7 +27,26 @@ body {
     margin-bottom: 20px;
     margin-left: 20px;
     padding: 20px;
+    box-sizing: border-box;
+    overflow-x: hidden;
+
 }
+
+.place-id-num {
+    color: blue;
+}
+
+.place .place-img {
+    margin: 0 -20px 30px;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+.place img {
+    width: 100%;
+    max-width: 100%;
+}
+
 
 #map-canvas {
     min-height: 100%;
