@@ -1,6 +1,7 @@
 #feature-head {
     text-align: center;
-    background-color: khaki;
+    background-color: black;  /* khaki */
+    color: snow;
     box-sizing-border-sizing: border-box;
     margin: 0;
     padding: 0;
@@ -12,9 +13,15 @@ body {
     background-color: azure;
 }
 
+#container {
+    position: relative;
+    top: -100%;
+    display: block;
+    max-width: 485px;
+}
+
 .place {
     background-color: white;
-    max-width: 485px;
     margin-bottom: 20px;
     margin-left: 20px;
 }
@@ -22,10 +29,6 @@ body {
 #map-canvas {
     min-height: 100%;
     width: 100%;
-}
-
-#container {
-    position: relative;
 }
 
 html, body {

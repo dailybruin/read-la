@@ -24,19 +24,21 @@ $(document).ready(function(){
         
         
     var mapDiv = $("#map-canvas");
-    var header = $('header').height();
+    var header = $('header');
+    var container = $('#container');
     $(window).scroll(function() {
-      if( $(this).scrollTop() > header ) {
+      if( $(this).scrollTop() > header.height() ) {
         mapDiv.css({
             "position": "fixed",
             "left": "0px",
             "top": "0px"
-            });
-        console.log("Add");
+        });
+        container.css("top", "0");        
       } else {
         mapDiv.css({
             "position": "relative",
-            });
+        });
+        container.css("top", "-100%");
       }
     });
 });
