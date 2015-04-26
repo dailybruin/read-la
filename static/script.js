@@ -1,5 +1,6 @@
 var data;
 $(document).ready(function(){
+    // Retrieve the content from Google Spreadsheet
     url = "https://spreadsheets.google.com/feeds/list/1-ctEBQtzM0vV-wEFMa1-AgcFtkWu4nPbBIzys-1rqq0/1/public/values?alt=json"
 	$.getJSON(url, function(json){
         data = clean_google_sheet_json(json);
@@ -23,11 +24,11 @@ $(document).ready(function(){
     map.panBy(-200, 0);
         
         
-        
     var mapDiv = $("#map-canvas");
     var header = $('header');
     var container = $('#container');
 
+    // Makes the map stay fixed but allow the divs with content still scroll
     $(window).scroll(function() {
       // Todo: account for margins
       if( $(this).scrollTop() > header.height() + header.padding('top') + header.padding('bottom')) {
@@ -87,7 +88,7 @@ function clean_google_sheet_json(data){
 
 // Format the JSON data from the Google Spreadsheet to be more suitable for our map:
 //   Extracts multiple image URLS
-//   Gets the longitude/latitude of each address
+//   Gets the longitude/latitude of each address so people can type addresses in common English
 function modifyData(places) {   
     geocoder = new google.maps.Geocoder();
     
