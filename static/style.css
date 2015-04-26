@@ -18,12 +18,15 @@ body {
     top: -100%;
     display: block;
     max-width: 485px;
+    margin-top: 30px;
+    margin-bottom: 40px;
 }
 
 .place {
     background-color: white;
     margin-bottom: 20px;
     margin-left: 20px;
+    padding: 20px;
 }
 
 #map-canvas {
