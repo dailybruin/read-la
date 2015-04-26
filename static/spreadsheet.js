@@ -6,22 +6,39 @@ $(document).ready(function(){
         modifyData(data);
 	    compile_and_insert_html('#template','#container',data);
 	});
- 
-
+    
  
     // Initialize Google Maps
-         var mapOptions = {
-          center: { lat: -34.397, lng: 150.644},
-          zoom: 8,
-          disableDefaultUI: true,
-          zoomControl: true,
-          zoomControlOptions: {
-            position: google.maps.ControlPosition.RIGHT_CENTER
-          },
-          scrollwheel: false
- 
-        };
-        var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+     var mapOptions = {
+      center: { lat: -34.397, lng: 150.644},
+      zoom: 8,
+      disableDefaultUI: true,
+      zoomControl: true,
+      zoomControlOptions: {
+        position: google.maps.ControlPosition.RIGHT_CENTER
+      },
+      scrollwheel: false
+    };
+    var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+        
+        
+        
+    var mapDiv = $("#map-canvas");
+    var header = $('header').height();
+    $(window).scroll(function() {
+      if( $(this).scrollTop() > header ) {
+        mapDiv.css({
+            "position": "fixed",
+            "left": "0px",
+            "top": "0px"
+            });
+        console.log("Add");
+      } else {
+        mapDiv.css({
+            "position": "relative",
+            });
+      }
+    });
 });
  
 // Takes in template id, compiles the template to html using data json object

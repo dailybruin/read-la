@@ -24,10 +24,8 @@ body {
     width: 100%;
 }
 
-.map-canvas-scolled {
-    position: fixed;
-    left: 0px;
-    top: 0px;
+#container {
+    position: relative;
 }
 
 html, body {
