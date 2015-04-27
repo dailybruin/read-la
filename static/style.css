@@ -71,6 +71,10 @@ h1 {
     margin-top: 10px;
 }
 
+.place .footer {
+    border-bottom: solid  lightgray;
+}
+
 #map-canvas {
     height: 100%;
     width: 100%;
