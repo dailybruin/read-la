@@ -123,7 +123,9 @@ function modify_and_compile(places) {
     geocoder = new google.maps.Geocoder();
     
     $.each(places, function(i, place) {
-        place.images = place.images.split('||');
+        place.images = place.images.split('\n');
+        place.paragraphs = place.paragraphs.split('\n');
+        
         geocoder.geocode({'address': place.address}, function (results, status) {
             place['latitude']  = results[0].geometry.location.k.toString();
             place['longitude'] = results[0].geometry.location.D.toString();           

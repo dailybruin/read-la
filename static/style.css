@@ -9,6 +9,13 @@
     background: url('texture.png');
 }
 
+#feature-head p {
+    width: 95%;
+    max-width: 720px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 p {
     font: 1em "Helvetica";
 }
@@ -100,6 +107,7 @@ html, body {
     background-image: linear-gradient(to bottom right, #336699 0%, #00A3EF 100%);
     border-radius: 2px 2px 0 0;
     box-shadow: 0 1px 2px rgba(0,0,0,0.3);
+    border-top-left-radius:0.4em;
 }
 .place h2::before {
     content: '';
@@ -112,11 +120,7 @@ html, body {
     border-width: 0 10px 15px 0;
     border-color: transparent #1984C4 transparent;
 }
-.place h2::before {left: 0;}
-
-body {
-    background: azure;
-}    
+.place h2::before {left: 0;}  
 
 
 

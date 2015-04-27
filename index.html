@@ -24,9 +24,12 @@
                 <div class="ribbon">
                     <h2><span class="place-id-num"><%= index + 1 %></span> <%= row.title %></h2>                                                
                 </div>
+                    <% _.each(row.paragraphs, function(para) { %>
                     <p>
-                        <%= row.paragraphs %>
+                        <%= para %>
                     </p>
+                    <% }); %>
+                    
                     <div class="place-img">
                     <% _.each(row.images, function(image) { %>
                         <img src="<%= image %>"</img>
@@ -40,13 +43,16 @@
     </script> 
     
     <header id="feature-head">
-        <h1>Feature Head Goes Here</h1>
+        <h1>Los Angeles Libraries / Title Here</h1>
         <p>Currently pulling data from <a style="color: azure; font-weight: bold;" href="https://docs.google.com/a/g.ucla.edu/spreadsheets/d/1-ctEBQtzM0vV-wEFMa1-AgcFtkWu4nPbBIzys-1rqq0/edit">this spreadsheet</a></p>
         <br />
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed et maximus orci. Sed ultrices pellentesque dolor vel tempus. Vivamus nec ipsum magna. Mauris malesuada lobortis diam, et mollis tortor elementum auctor. Etiam ac facilisis elit. Donec consectetur fringilla pellentesque. Sed varius sapien est, at vehicula turpis varius nec. Ut nec dictum enim. Suspendisse et pharetra lectus, eu blandit ligula. Nunc id ligula id metus suscipit placerat.</p>
-        <p>Etiam non vestibulum odio. Vestibulum faucibus lorem sit amet lorem varius auctor. Morbi at nibh vel lacus semper convallis. Proin at metus porttitor, porttitor lacus vel, volutpat lectus. Aliquam erat volutpat. Praesent ex magna, fringilla non aliquam ut, luctus at sem. Ut vel leo condimentum, tempus diam a, ullamcorper mauris. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Donec a commodo felis. Quisque sit amet eleifend diam. Cras bibendum non sem sed mattis. Nullam porta accumsan ipsum sed hendrerit.</p>
-        <p>Quisque sit amet lacus neque. Aenean sollicitudin lorem fringilla velit vestibulum dignissim. Aliquam non porta orci. Morbi auctor at urna et congue. Duis vitae turpis metus. Pellentesque vitae mattis leo, et rutrum arcu. Fusce quis tristique mi, placerat lobortis ante. Vivamus feugiat commodo massa, ac imperdiet libero interdum nec. Curabitur aliquet vulputate diam quis fermentum. Pellentesque lectus diam, elementum sit amet pulvinar at, vulputate non mi. Duis nisl ipsum, venenatis sit amet leo sed, tempor fringilla dolor. Ut euismod congue nisi, nec consectetur mauris porttitor nec. Vivamus cursus commodo felis. Sed purus sem, commodo id varius consequat, sollicitudin sit amet est.</p>
-        <p></p>
+
+        <p>Book papers crinkle while their pages turn under the hands of the expert or casual reader. The sounds of cars driving or Angelenos talking are audible but muted by the insulated walls, humming quietly. People type away at computers, whisper to their friends, take a sip of coffee.</p>
+        <p>Beyond the hallowed halls and shelves of Powell Library, past the continual chaos of Westwood’s Starbucks, across that jungle known as Wilshire Boulevard, libraries all over the city lie waiting for students to call home – at least for a few hours.</p>
+        <p>Unlike some colleges, where students are limited to only their campus resources, UCLA’s prime Los Angeles real estate means students have access to dozens of public libraries, varying in size, sound, location and aesthetic.</p>
+        <p>For the avid studier, researcher or helpless bibliophile, exploring LA’s public libraries is a must. Visiting one provides respite from being stuck on campus and relief from the jangled mayhem of a coffee shop. Not to mention you’ll get to travel and experience another part of the city while doing so.</p>
+        <p>If you’re looking for a change from Powell or Young Research Library, here are some of the city’s best public library offerings.        
+       
     </header>
     <div id="map-canvas"></div>
     <div id="container"></div>
