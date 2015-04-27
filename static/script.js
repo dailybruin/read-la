@@ -158,8 +158,4 @@ $.fn.padding = function (direction) {
     else {
         // do unit conversion from em to px...
     }
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> 9cd7c56d5b368f973b9700cd3acd1845ef87a11c
