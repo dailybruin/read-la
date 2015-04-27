@@ -4,7 +4,7 @@ $(document).ready(function(){
     var mediaQuery;
 
     // Retrieve the content from Google Spreadsheet
-    url = "https://spreadsheets.google.com/feeds/list/1-ctEBQtzM0vV-wEFMa1-AgcFtkWu4nPbBIzys-1rqq0/1/public/values?alt=json"
+    url = "https://spreadsheets.google.com/feeds/list/1NNpOjxrhXcbXVgP9hCptv8Vtj8mztB91gUzX5U6sAAM/1/public/values?alt=json"
 	$.getJSON(url, function(json){
         data = clean_google_sheet_json(json);
         modify_and_compile(data);
