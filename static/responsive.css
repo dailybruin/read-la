@@ -1,5 +1,5 @@
-@media (max-width: 800px) {
-    p {
+@media (max-width: 582px) {
+    h1 {
         color: blue;
     } 
     
@@ -24,6 +24,7 @@
         max-width: 100%;
         margin-left: 0;
         margin-right: 0;
+        position: relative;
     }
     
     div.place {
@@ -32,4 +33,9 @@
         margin-right: 0;
     }
     
+    #map-canvas {
+        max-height: 145px;
+        height: 145px;
+        z-index: 5;
+    }
 }

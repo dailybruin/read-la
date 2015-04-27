@@ -1,6 +1,8 @@
 var data;
 var coordsCount = 0;
 $(document).ready(function(){
+    var mediaQuery;
+
     // Retrieve the content from Google Spreadsheet
     url = "https://spreadsheets.google.com/feeds/list/1-ctEBQtzM0vV-wEFMa1-AgcFtkWu4nPbBIzys-1rqq0/1/public/values?alt=json"
 	$.getJSON(url, function(json){
@@ -30,20 +32,47 @@ $(document).ready(function(){
 
     // Makes the map stay fixed but allow the divs with content still scroll
     $(window).scroll(function() {
-      // Todo: account for margins
-      if( $(this).scrollTop() > header.height() + header.padding('top') + header.padding('bottom')) {
-        mapDiv.css({
-            "position": "fixed",
-            "left": "0px",
-            "top": "0px"
-        });
-        container.css("top", "0");        
-      } else {
-        mapDiv.css({
-            "position": "relative",
-        });
-        container.css("top", "-100%");
-      }
+        mediaQuery = window.matchMedia('all and (max-width: 582px)');
+        if (mediaQuery.matches) {
+            if( $(this).scrollTop() > header.height() + header.padding('top') + header.padding('bottom')) {  
+                mapDiv.css({
+                    "max-height": "145px",
+                    "height": "145px",
+                    "position": "fixed",
+                    "left": "0px",                    
+                    "top": "0px"                    
+                });
+                container.css({
+                    "position": "relative",
+                    "top": "145px"
+                });                
+            } else {
+                mapDiv.css({
+                    "position": "relative",
+                });
+                container.css({
+                    "position": "relative",
+                    "top": "0px"
+                }); 
+            }        
+        } else {        
+            // Todo: account for margins
+            if( $(this).scrollTop() > header.height() + header.padding('top') + header.padding('bottom')) {  
+                mapDiv.css({
+                    "max-height": "",
+                    "height": "",                
+                    "position": "fixed",
+                    "left": "0px",
+                    "top": "0px"
+                });
+                container.css("top", "0");        
+            } else {
+                mapDiv.css({
+                    "position": "relative",
+                });
+                container.css("top", "-100%");
+            }
+        }
     });
 });
  
