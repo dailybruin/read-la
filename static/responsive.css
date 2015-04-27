@@ -1,8 +1,4 @@
-@media (max-width: 582px) {
-    h1 {
-        color: blue;
-    } 
-    
+@media (max-width: 582px) {   
     h1 {
         margin-top: 0;
         font-size: 3em;
