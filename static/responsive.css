@@ -1,0 +1,37 @@
+@media (max-width: 582px) {   
+    h1 {
+        margin-top: 0;
+        font-size: 3em;
+        line-height: 80%;
+    }
+    
+    #feature-head {
+        width: 100%;
+        margin-left: 0;
+        margin-right: 0;
+        max-width: 100%;
+        padding-top: 3%;
+    }
+    
+
+
+    #container  {
+        width: 100%;
+        max-width: 100%;
+        margin-left: 0;
+        margin-right: 0;
+        position: relative;
+    }
+    
+    div.place {
+        width: 100%;
+        margin-left: 0;
+        margin-right: 0;
+    }
+    
+    #map-canvas {
+        max-height: 145px;
+        height: 145px;
+        z-index: 5;
+    }
+}

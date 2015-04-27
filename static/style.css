@@ -1,0 +1,129 @@
+#feature-head {
+    background-color: black;  /* khaki */
+    color: snow;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 30px;
+    overflow: hidden;
+    min-height: 100%;
+    background: url('texture.png');
+}
+
+#feature-head p {
+    width: 95%;
+    max-width: 720px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+p {
+    font: 1em "Helvetica";
+}
+
+h1 {
+    font: bold 5em "Calibri", Helvetica, Arial, sans-serif;
+    text-align: center;
+    font-size: 3em;
+    line-height: 80%;
+}
+
+
+#container {
+    position: relative;
+    display: block;
+    max-width: 485px;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+.place {
+    margin-bottom: 25px;
+    margin-left: 20px;
+    padding: 5px 20px 20px 20px;
+    box-sizing: border-box;
+    box-shadow: 6px 9px 17px -2px rgba(0,0,0,0.6);
+    border-radius: 10px;
+    background: url('texture.png');
+    color: white;
+}
+
+/*
+.place-id-num {
+    color: white;
+}
+*/
+
+.place .place-img {
+    margin: 0 -20px 30px;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+.place img {
+    width: 100%;
+    max-width: 100%;
+    margin-bottom: 10px;
+}
+
+.place h2 {
+    font: bold 2em "Calibri", Helvetica, Arial, sans-serif;
+    margin-top: 10px;
+}
+
+#map-canvas {
+    height: 100%;
+    width: 100%;
+}
+
+html, body {
+    height: 100%;
+    padding: 0;
+    margin: 0;
+}
+
+
+
+
+
+
+
+
+.place h2 {
+    display: block;
+    box-sizing: border-box;
+    height: 50px;
+    line-height: 1.3;
+    width: 475px;
+    margin-top: 10px;
+    padding: 5px 30px;
+    position: relative;
+    left: -30px;
+    top: 8px;
+    color: #FFF;
+    text-shadow: 0 1px 1px #111;
+    border-top: 1px solid #363636;
+    border-bottom: 1px solid #202020;
+    background: #336699;
+    background-image: linear-gradient(to bottom right, #336699 0%, #00A3EF 100%);
+    border-radius: 2px 2px 0 0;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.3);
+    border-top-left-radius:0.4em;
+}
+.place h2::before {
+    content: '';
+    display: block;
+    width: 0;
+    height: 0;
+    position: absolute;
+    bottom: -15px;
+    border-style: solid;
+    border-width: 0 10px 15px 0;
+    border-color: transparent #1984C4 transparent;
+}
+.place h2::before {left: 0;}  
+
+
+
+
+
+
