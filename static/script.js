@@ -1,11 +1,11 @@
 var data;
+var coordsCount = 0;
 $(document).ready(function(){
     // Retrieve the content from Google Spreadsheet
     url = "https://spreadsheets.google.com/feeds/list/1-ctEBQtzM0vV-wEFMa1-AgcFtkWu4nPbBIzys-1rqq0/1/public/values?alt=json"
 	$.getJSON(url, function(json){
         data = clean_google_sheet_json(json);
-        modifyData(data);
-	    compile_and_insert_html('#template','#container',data);
+        modify_and_compile(data);
 	});
     
  
@@ -89,13 +89,20 @@ function clean_google_sheet_json(data){
 // Format the JSON data from the Google Spreadsheet to be more suitable for our map:
 //   Extracts multiple image URLS
 //   Gets the longitude/latitude of each address so people can type addresses in common English
-function modifyData(places) {   
+//   Geocoding is asynchronous so we use compile_and_insert_html as a callback function.
+function modify_and_compile(places) {   
     geocoder = new google.maps.Geocoder();
     
     $.each(places, function(i, place) {
         place.images = place.images.split('||');
         geocoder.geocode({'address': place.address}, function (results, status) {
-           place['LatLng'] = results[0].geometry.location;
+            place['latitude']  = results[0].geometry.location.k.toString();
+            place['longitude'] = results[0].geometry.location.D.toString();           
+            coordsCount++;
+           
+            if (coordsCount === places.length) {
+                compile_and_insert_html('#template','#container',data);
+            }
         });
     });  
 }
