@@ -31,6 +31,7 @@ h1 {
 #container {
     position: relative;
     display: block;
+    width: 60%;
     max-width: 485px;
     margin-top: 50px;
     margin-bottom: 50px;
@@ -93,7 +94,7 @@ html, body {
     box-sizing: border-box;
     height: 50px;
     line-height: 1.3;
-    width: 475px;
+    width: calc(100% + 50px);
     margin-top: 10px;
     padding: 5px 30px;
     position: relative;
