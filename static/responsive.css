@@ -1,0 +1,35 @@
+@media (max-width: 800px) {
+    p {
+        color: blue;
+    } 
+    
+    h1 {
+        margin-top: 0;
+        font-size: 3em;
+        line-height: 80%;
+    }
+    
+    #feature-head {
+        width: 100%;
+        margin-left: 0;
+        margin-right: 0;
+        max-width: 100%;
+        padding-top: 3%;
+    }
+    
+
+
+    #container  {
+        width: 100%;
+        max-width: 100%;
+        margin-left: 0;
+        margin-right: 0;
+    }
+    
+    div.place {
+        width: 100%;
+        margin-left: 0;
+        margin-right: 0;
+    }
+    
+}
