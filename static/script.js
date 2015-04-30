@@ -160,3 +160,11 @@ $.fn.padding = function (direction) {
         // do unit conversion from em to px...
     }
 }
+
+//Waypoints Stuff
+var waypoint = new Waypoint({
+    element: document.getElementById('place-1'),
+    handler: function() {
+        panTo({lat: $(this).attr("data-latitude"), lng: $(this).attr("data-longitude")});
+    }
+})
