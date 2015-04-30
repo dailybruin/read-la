@@ -127,6 +127,7 @@ function modify_and_compile(places) {
         place.paragraphs = place.paragraphs.split('\n');
         
         geocoder.geocode({'address': place.address}, function (results, status) {
+            // Note: the 'k' and 'D' to represent lat/long may change with the Google maps API
             place['latitude']  = results[0].geometry.location.k.toString();
             place['longitude'] = results[0].geometry.location.D.toString();           
             coordsCount++;
