@@ -1,18 +1,10 @@
 var data;
 var coordsCount = 0;
 $(document).ready(function(){
-    var mediaQuery;
+    var mediaQuery = window.matchMedia('all and (max-width: 582px)');
 
-    // Retrieve the content from Google Spreadsheet
-    url = "https://spreadsheets.google.com/feeds/list/1NNpOjxrhXcbXVgP9hCptv8Vtj8mztB91gUzX5U6sAAM/1/public/values?alt=json"
-	$.getJSON(url, function(json){
-        data = clean_google_sheet_json(json);
-        modify_and_compile(data);
-	});
-    
- 
     // Initialize Google Maps
-     var mapOptions = {
+    var mapOptions = {
       center: { lat: 34.069117, lng: -118.445170},
       zoom: 15,
       disableDefaultUI: true,
@@ -24,6 +16,17 @@ $(document).ready(function(){
     };
     var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
     map.panBy(-200, 0);
+    
+    
+    // Retrieve the content from Google Spreadsheet
+    url = "https://spreadsheets.google.com/feeds/list/1NNpOjxrhXcbXVgP9hCptv8Vtj8mztB91gUzX5U6sAAM/1/public/values?alt=json"
+	$.getJSON(url, function(json){
+        data = clean_google_sheet_json(json);
+        modify_and_compile(data);
+	});
+    
+ 
+
         
         
     var mapDiv = $("#map-canvas");
@@ -32,7 +35,6 @@ $(document).ready(function(){
 
     // Makes the map stay fixed but allow the divs with content still scroll
     $(window).scroll(function() {
-        mediaQuery = window.matchMedia('all and (max-width: 582px)');
         if (mediaQuery.matches) {
             if( $(this).scrollTop() > header.height() + header.padding('top') + header.padding('bottom')) {  
                 mapDiv.css({
