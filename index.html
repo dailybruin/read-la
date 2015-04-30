@@ -22,7 +22,7 @@
 
     <script id="template" type="text/template">
         <% _.each(rows, function(row, index) { %>
-            <div class="place" data-latitude="<%= row.latitude %>" data-longitude="<%= row.longitude %>">
+            <div id="place<%= index + 1 %>" class="place" data-latitude="<%= row.latitude %>" data-longitude="<%= row.longitude %>">
                 <div class="ribbon">
                     <h2><span class="place-id-num"><%= index + 1 %></span> <%= row.title %></h2>                                                
                 </div>

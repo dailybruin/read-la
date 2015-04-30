@@ -119,6 +119,7 @@ function clean_google_sheet_json(data){
 //   Extracts multiple image URLS
 //   Gets the longitude/latitude of each address so people can type addresses in common English
 //   Geocoding is asynchronous so we use compile_and_insert_html as a callback function.
+// Calls compil
 function modify_and_compile(places) {   
     geocoder = new google.maps.Geocoder();
     
@@ -132,6 +133,8 @@ function modify_and_compile(places) {
             place['longitude'] = results[0].geometry.location.D.toString();           
             coordsCount++;
            
+           // geocode() is ansynchronous so we need to able to keep track
+           //   of when it finished and do a callback.
             if (coordsCount === places.length) {
                 compile_and_insert_html('#template','#container',data);
             }
