@@ -36,6 +36,7 @@ $(document).ready(function(){
         map.panBy(-200, 0);
         
 
+
         /*place_array = $('.place');
         latlng_array = [];
         waypoint_array = [];
@@ -59,6 +60,11 @@ $(document).ready(function(){
 
         /*var latlng = new google.maps.LatLng(parseFloat($('#place2').attr('data-latitude')), parseFloat($('#place2').attr('data-longitude')));
 
+        
+        
+        var latlng = new google.maps.LatLng(parseFloat($('#place2').attr('data-latitude')), parseFloat($('#place2').attr('data-longitude')));
+
+
         var waypoint = new Waypoint({
           element: document.getElementById('place1'),
           handler: function() {
@@ -66,8 +72,20 @@ $(document).ready(function(){
             map.panTo(latlng);
           }
 
-        })*/
 
+        })*/
+        
+        // Create markers for each place.
+        var places_array = $('.place');
+        $.each(places_array, function(i, place) {
+            var latlng = new google.maps.LatLng(parseFloat($('#place' + (i + 1)).attr('data-latitude')), parseFloat($('#place' + (i + 1)).attr('data-longitude')));
+            
+            var marker = new google.maps.Marker({
+                position: latlng,
+                map: map,
+                title: (i + 1).toString()
+            });
+        });
     }
  
     
