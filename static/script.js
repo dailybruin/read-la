@@ -34,6 +34,16 @@ $(document).ready(function(){
         var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
         map.panBy(-200, 0);
         
+        
+        var latlng = new google.maps.LatLng(parseFloat($('#place2').attr('data-latitude')), parseFloat($('#place2').attr('data-longitude')));
+
+        var waypoint = new Waypoint({
+          element: document.getElementById('place2'),
+          handler: function() {
+            //map.panTo({ lat : parseFloat($(this).attr('data-latitude')), lng : parseFloat($(this).attr('data-longitude')) })
+            map.panTo(latlng);
+          }
+        })
     }
  
     
