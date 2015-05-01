@@ -34,6 +34,8 @@ $(document).ready(function(){
         var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
         map.panBy(-200, 0);
         
+
+        
         
         var latlng = new google.maps.LatLng(parseFloat($('#place2').attr('data-latitude')), parseFloat($('#place2').attr('data-longitude')));
 
@@ -44,6 +46,17 @@ $(document).ready(function(){
             map.panTo(latlng);
           }
         })
+        
+        // Create markers for each place.
+        var marker;
+        var places_array = $('.place');
+        $.each(places_array, function(i, place) {
+            latlng = new google.maps.LatLng(parseFloat($('#place' + (i + 1)).attr('data-latitude')), parseFloat($('#place' + (i + 1)).attr('data-longitude')));
+            marker = new google.maps.Marker({
+                position: latlng,
+                map: map
+            });
+        });
     }
  
     
