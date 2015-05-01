@@ -1,5 +1,6 @@
 var data;
 var coordsCount = 0;
+var map;
 $(document).ready(function(){
     var mediaQuery;
 
@@ -22,10 +23,9 @@ $(document).ready(function(){
       },
       scrollwheel: false
     };
-    var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+    map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
     map.panBy(-200, 0);
-        
-        
+              
     var mapDiv = $("#map-canvas");
     var header = $('header');
     var container = $('#container');
@@ -84,6 +84,22 @@ function compile_and_insert_html(template_id, div_id, data) {
 		'rows': data
 	});
 	$(div_id).html(template_html);
+
+    /*var waypoint = new Waypoint({
+        element: document.getElementById('place2'),
+        handler: function() {
+            //map.panTo({lat: $(this).attr("data-latitude"), lng: $(this).attr("data-longitude")});
+            notify('Basic waypoint triggered.');
+        }
+    });*/
+
+    var waypoint = new Waypoint({
+      element: document.getElementById('place2'),
+      handler: function() {
+        console.log("got to place2");
+      }
+    })
+
 }
  
  
@@ -119,6 +135,7 @@ function clean_google_sheet_json(data){
 //   Extracts multiple image URLS
 //   Gets the longitude/latitude of each address so people can type addresses in common English
 //   Geocoding is asynchronous so we use compile_and_insert_html as a callback function.
+// Calls compil
 function modify_and_compile(places) {   
     geocoder = new google.maps.Geocoder();
     
@@ -132,6 +149,8 @@ function modify_and_compile(places) {
             place['longitude'] = results[0].geometry.location.D.toString();           
             coordsCount++;
            
+           // geocode() is ansynchronous so we need to able to keep track
+           //   of when it finished and do a callback.
             if (coordsCount === places.length) {
                 compile_and_insert_html('#template','#container',data);
             }
@@ -160,11 +179,3 @@ $.fn.padding = function (direction) {
         // do unit conversion from em to px...
     }
 }
-
-//Waypoints Stuff
-var waypoint = new Waypoint({
-    element: document.getElementById('place-1'),
-    handler: function() {
-        panTo({lat: $(this).attr("data-latitude"), lng: $(this).attr("data-longitude")});
-    }
-})
