@@ -1,4 +1,5 @@
 var data;
+var place_array;
 $(document).ready(function(){
     var mediaQuery = window.matchMedia('all and (max-width: 582px)');
  
@@ -15,10 +16,14 @@ $(document).ready(function(){
     function callback() {
         // Generate the actual html and divs from the JSON.
         compile_and_insert_html('#template','#container',data);
-         
-        // Initialize Google Maps
+       
+       
+        //------- Initialize Google Maps -----------  
+        // Center map to the first location automatically.
+        var center = {lat: parseFloat($('#place1').attr("data-latitude")), 
+                      lng: parseFloat($('#place1').attr("data-longitude"))};
         var mapOptions = {
-          center: { lat: 34.069117, lng: -118.445170},
+          center: center,
           zoom: 15,
           disableDefaultUI: true,
           zoomControl: true,
@@ -30,17 +35,27 @@ $(document).ready(function(){
         var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
         map.panBy(-200, 0);
         
-        var place_array = $('.place');
+
+        /*place_array = $('.place');
+        latlng_array = [];
+        waypoint_array = [];
         for(var i = 0; i < place_array.length; i++) {
             var place_number = i + 1;
-            var latlng = new google.maps.LatLng(parseFloat($('#place' + place_number).attr('data-latitiude')), parseFloat($('#place' + place_number).attr('data-longitude')));
-            var waypoint = new Waypoint({
+            latlng_array[i] = new google.maps.LatLng(parseFloat($('#place' + place_number).attr('data-latitude')), parseFloat($('#place' + place_number).attr('data-longitude')));
+            waypoint_array[i] = new Waypoint({
                 element: document.getElementById('place' + place_number),
                 handler: function() {
-                    map.panTo(latlng);
+                    map.panTo(latlng_array[i]);
                 }
             });
-        }
+        }*/
+
+        var waypoints = $('.place').waypoint({
+          handler: function(direction) {
+            var latlng = new google.maps.LatLng(parseFloat(this.element.attributes[2].value), parseFloat(this.element.attributes[3].value));
+            map.panTo(latlng);
+          }
+        })
 
         /*var latlng = new google.maps.LatLng(parseFloat($('#place2').attr('data-latitude')), parseFloat($('#place2').attr('data-longitude')));
 
@@ -50,6 +65,7 @@ $(document).ready(function(){
             //map.panTo({ lat : parseFloat($(this).attr('data-latitude')), lng : parseFloat($(this).attr('data-longitude')) })
             map.panTo(latlng);
           }
+
         })*/
 
     }
