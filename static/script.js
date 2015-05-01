@@ -48,13 +48,14 @@ $(document).ready(function(){
         })
         
         // Create markers for each place.
-        var marker;
         var places_array = $('.place');
         $.each(places_array, function(i, place) {
-            latlng = new google.maps.LatLng(parseFloat($('#place' + (i + 1)).attr('data-latitude')), parseFloat($('#place' + (i + 1)).attr('data-longitude')));
-            marker = new google.maps.Marker({
+            var latlng = new google.maps.LatLng(parseFloat($('#place' + (i + 1)).attr('data-latitude')), parseFloat($('#place' + (i + 1)).attr('data-longitude')));
+            
+            var marker = new google.maps.Marker({
                 position: latlng,
-                map: map
+                map: map,
+                title: (i + 1).toString()
             });
         });
     }
