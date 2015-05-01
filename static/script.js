@@ -15,10 +15,14 @@ $(document).ready(function(){
     function callback() {
         // Generate the actual html and divs from the JSON.
         compile_and_insert_html('#template','#container',data);
-         
-        // Initialize Google Maps
+       
+       
+        //------- Initialize Google Maps -----------  
+        // Center map to the first location automatically.
+        var center = {lat: parseFloat($('#place1').attr("data-latitude")), 
+                      lng: parseFloat($('#place1').attr("data-longitude"))};
         var mapOptions = {
-          center: { lat: 34.069117, lng: -118.445170},
+          center: center,
           zoom: 15,
           disableDefaultUI: true,
           zoomControl: true,
@@ -29,7 +33,6 @@ $(document).ready(function(){
         };
         var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
         map.panBy(-200, 0);
-        
         
     }
  
