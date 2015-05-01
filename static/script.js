@@ -1,38 +1,53 @@
 var data;
-var coordsCount = 0;
-var map;
 $(document).ready(function(){
-    var mediaQuery;
-
-    // Retrieve the content from Google Spreadsheet
+    var mediaQuery = window.matchMedia('all and (max-width: 582px)');
+ 
+    // Retrieve the content from Google Spreadsheet.
+    // Geocoding the locations (getting lat/lng from the common location name) is asynchronous
+    // so we need to do a callback.  Put everything that depends on the map and place divs in
+    // the callback() function below.
     url = "https://spreadsheets.google.com/feeds/list/1NNpOjxrhXcbXVgP9hCptv8Vtj8mztB91gUzX5U6sAAM/1/public/values?alt=json"
 	$.getJSON(url, function(json){
         data = clean_google_sheet_json(json);
-        modify_and_compile(data);
+        modify_and_compile(data, callback);
 	});
     
+    function callback() {
+        // Generate the actual html and divs from the JSON.
+        compile_and_insert_html('#template','#container',data);
+         
+        // Initialize Google Maps
+        var mapOptions = {
+          center: { lat: 34.069117, lng: -118.445170},
+          zoom: 15,
+          disableDefaultUI: true,
+          zoomControl: true,
+          zoomControlOptions: {
+            position: google.maps.ControlPosition.RIGHT_CENTER
+          },
+          scrollwheel: false
+        };
+        var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+        map.panBy(-200, 0);
+        
+        var latlng = new google.maps.LatLng(parseFloat($('#place2').attr('data-latitude')), parseFloat($('#place2').attr('data-longitude')));
+
+        var waypoint = new Waypoint({
+          element: document.getElementById('place1'),
+          handler: function() {
+            //map.panTo({ lat : parseFloat($(this).attr('data-latitude')), lng : parseFloat($(this).attr('data-longitude')) })
+            map.panTo(latlng);
+          }
+        })
+
+    }
  
-    // Initialize Google Maps
-     var mapOptions = {
-      center: { lat: 34.069117, lng: -118.445170},
-      zoom: 15,
-      disableDefaultUI: true,
-      zoomControl: true,
-      zoomControlOptions: {
-        position: google.maps.ControlPosition.RIGHT_CENTER
-      },
-      scrollwheel: false
-    };
-    map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
-    map.panBy(-200, 0);
-              
+    
+    // Makes the map stay fixed but allow the divs with content still scroll
     var mapDiv = $("#map-canvas");
     var header = $('header');
     var container = $('#container');
-
-    // Makes the map stay fixed but allow the divs with content still scroll
     $(window).scroll(function() {
-        mediaQuery = window.matchMedia('all and (max-width: 582px)');
         if (mediaQuery.matches) {
             if( $(this).scrollTop() > header.height() + header.padding('top') + header.padding('bottom')) {  
                 mapDiv.css({
@@ -84,22 +99,6 @@ function compile_and_insert_html(template_id, div_id, data) {
 		'rows': data
 	});
 	$(div_id).html(template_html);
-
-    /*var waypoint = new Waypoint({
-        element: document.getElementById('place2'),
-        handler: function() {
-            //map.panTo({lat: $(this).attr("data-latitude"), lng: $(this).attr("data-longitude")});
-            notify('Basic waypoint triggered.');
-        }
-    });*/
-
-    var waypoint = new Waypoint({
-      element: document.getElementById('place2'),
-      handler: function() {
-        console.log("got to place2");
-      }
-    })
-
 }
  
  
@@ -135,24 +134,27 @@ function clean_google_sheet_json(data){
 //   Extracts multiple image URLS
 //   Gets the longitude/latitude of each address so people can type addresses in common English
 //   Geocoding is asynchronous so we use compile_and_insert_html as a callback function.
-// Calls compil
-function modify_and_compile(places) {   
-    geocoder = new google.maps.Geocoder();
+// Asynchronous, needs a callback.
+function modify_and_compile(places, callback) {   
+    var num_places_processed = 0;
+
+    var geocoder = new google.maps.Geocoder();
     
     $.each(places, function(i, place) {
         place.images = place.images.split('\n');
         place.paragraphs = place.paragraphs.split('\n');
         
+        // geocode() is ansynchronous so we need to able to keep track
+        //   of when it finished and do a callback.
         geocoder.geocode({'address': place.address}, function (results, status) {
             // Note: the 'k' and 'D' to represent lat/long may change with the Google maps API
             place['latitude']  = results[0].geometry.location.k.toString();
             place['longitude'] = results[0].geometry.location.D.toString();           
-            coordsCount++;
-           
-           // geocode() is ansynchronous so we need to able to keep track
-           //   of when it finished and do a callback.
-            if (coordsCount === places.length) {
-                compile_and_insert_html('#template','#container',data);
+            num_places_processed++;
+
+            // Finished processing
+            if (num_places_processed === places.length) {
+                callback();
             }
         });
     });  
