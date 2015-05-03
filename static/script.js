@@ -1,6 +1,6 @@
 var data;
 var place_array;
-var xoffset;
+var xoffset = 0;
 $(document).ready(function(){
     var mediaQuery = window.matchMedia('all and (max-width: 582px)');
  
@@ -18,9 +18,12 @@ $(document).ready(function(){
         // Generate the actual html and divs from the JSON.
         compile_and_insert_html('#template','#container',data);
 
-        //xoffset = -((window.innerWidth - $("#place1").width()) - (window.innerWidth / 2));
-        xoffset = -((window.innerWidth / 2) - (window.innerWidth - $("#place1").width()) / 2);
-       
+        if (mediaQuery) {
+            xoffset = 0;
+        }
+        else {
+            xoffset = -((window.innerWidth / 2) - (window.innerWidth - $("#container").width()) / 2);
+        }
        
         //------- Initialize Google Maps -----------  
         // Center map to the first location automatically.
