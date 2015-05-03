@@ -18,7 +18,8 @@ $(document).ready(function(){
         // Generate the actual html and divs from the JSON.
         compile_and_insert_html('#template','#container',data);
 
-        xoffset = -((window.innerWidth - $("#place1").width()) - (window.innerWidth / 2));
+        //xoffset = -((window.innerWidth - $("#place1").width()) - (window.innerWidth / 2));
+        xoffset = -((window.innerWidth / 2) - (window.innerWidth - $("#place1").width()) / 2);
        
        
         //------- Initialize Google Maps -----------  
