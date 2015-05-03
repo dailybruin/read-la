@@ -61,6 +61,7 @@ $(document).ready(function(){
             var scrolltime = 500;
             google.maps.event.addListener(marker, 'click', function () {
                 Waypoint.disableAll();
+                map.panTo(latlng);
                 setTimeout(function(){ Waypoint.enableAll();}, scrolltime);
                 $('html, body').animate({
                     scrollTop: $("#place" + (i+1)).offset().top
