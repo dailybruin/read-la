@@ -12,22 +12,22 @@
         max-width: 100%;
         padding-top: 3%;
     }
-    
-
 
     #container  {
         width: 100%;
         max-width: 100%;
-        margin-left: 0;
-        margin-right: 0;
+        margin: 0;
         position: relative;
+        margin-top: 0;
     }
     
     div.place {
         width: 100%;
         margin-left: 0;
         margin-right: 0;
+        margin-bottom: 0;
         overflow-x: hidden;
+        border-radius: 0;
     }
     
     #map-canvas {
