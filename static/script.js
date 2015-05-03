@@ -1,9 +1,8 @@
 var data;
 var place_array;
+var xoffset;
 $(document).ready(function(){
     var mediaQuery = window.matchMedia('all and (max-width: 582px)');
-    
-    var offset = window
  
     // Retrieve the content from Google Spreadsheet.
     // Geocoding the locations (getting lat/lng from the common location name) is asynchronous
@@ -18,6 +17,8 @@ $(document).ready(function(){
     function callback() {
         // Generate the actual html and divs from the JSON.
         compile_and_insert_html('#template','#container',data);
+
+        xoffset = -((window.innerWidth - $("#place1").width()) - (window.innerWidth / 2));
        
        
         //------- Initialize Google Maps -----------  
@@ -35,13 +36,15 @@ $(document).ready(function(){
           scrollwheel: false
         };
         var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
-        map.panBy(-200, 0);
+        map.panBy(xoffset, 0);
        
         // Create waypoints that move the map to the marker when page is scrolled.
         var waypoints = $('.place').waypoint({
           handler: function(direction) {
             var latlng = new google.maps.LatLng(parseFloat(this.element.attributes[2].value), parseFloat(this.element.attributes[3].value));
-            map.panTo(latlng);
+            //map.panTo(latlng);
+            //map.panBy(-225.5, 0);
+            map.panToWithOffset(latlng, xoffset, 0);
           },
           offset: '50%'
         })
@@ -61,7 +64,9 @@ $(document).ready(function(){
             var scrolltime = 500;
             google.maps.event.addListener(marker, 'click', function () {
                 Waypoint.disableAll();
-                map.panTo(latlng);
+                //map.panTo(latlng);
+                //map.panBy(-225.5, 0);
+                map.panToWithOffset(latlng, xoffset, 0);
                 setTimeout(function(){ Waypoint.enableAll();}, scrolltime);
                 $('html, body').animate({
                     scrollTop: $("#place" + (i+1)).offset().top
@@ -209,3 +214,18 @@ $.fn.padding = function (direction) {
         // do unit conversion from em to px...
     }
 }
+
+//pantowithoffset function
+google.maps.Map.prototype.panToWithOffset = function(latlng, offsetX, offsetY) {
+    var map = this;
+    var ov = new google.maps.OverlayView();
+    ov.onAdd = function() {
+        var proj = this.getProjection();
+        var aPoint = proj.fromLatLngToContainerPixel(latlng);
+        aPoint.x = aPoint.x+offsetX;
+        aPoint.y = aPoint.y+offsetY;
+        map.panTo(proj.fromContainerPixelToLatLng(aPoint));
+    }; 
+    ov.draw = function() {}; 
+    ov.setMap(this); 
+};
