@@ -24,7 +24,7 @@ $(document).ready(function(){
                       lng: parseFloat($('#place1').attr("data-longitude"))};
         var mapOptions = {
           center: center,
-          zoom: 15,
+          zoom: 14,
           disableDefaultUI: true,
           zoomControl: true,
           zoomControlOptions: {
@@ -55,25 +55,9 @@ $(document).ready(function(){
           handler: function(direction) {
             var latlng = new google.maps.LatLng(parseFloat(this.element.attributes[2].value), parseFloat(this.element.attributes[3].value));
             map.panTo(latlng);
-          }
+          },
+          offset: '50%'
         })
-
-        /*var latlng = new google.maps.LatLng(parseFloat($('#place2').attr('data-latitude')), parseFloat($('#place2').attr('data-longitude')));
-
-        
-        
-        var latlng = new google.maps.LatLng(parseFloat($('#place2').attr('data-latitude')), parseFloat($('#place2').attr('data-longitude')));
-
-
-        var waypoint = new Waypoint({
-          element: document.getElementById('place1'),
-          handler: function() {
-            //map.panTo({ lat : parseFloat($(this).attr('data-latitude')), lng : parseFloat($(this).attr('data-longitude')) })
-            map.panTo(latlng);
-          }
-
-
-        })*/
         
         // Create markers for each place.
         var places_array = $('.place');
