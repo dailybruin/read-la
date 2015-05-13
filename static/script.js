@@ -49,10 +49,17 @@ $(document).ready(function(){
         $.each(places_array, function(i, place) {
             var latlng = new google.maps.LatLng(parseFloat($('#place' + (i + 1)).attr('data-latitude')), parseFloat($('#place' + (i + 1)).attr('data-longitude')));
             
+            var icon = {
+                url: "static/icon" + (i+1) + ".png", // url
+                scaledSize: new google.maps.Size(80, 59), // scaled size
+                origin: new google.maps.Point(0, 0), // origin
+                anchor: new google.maps.Point(0, 50) // anchor
+            };
             var marker = new google.maps.Marker({
                 position: latlng,
                 map: map,
-                title: (i + 1).toString()
+                title: (i + 1).toString(),
+                icon: icon
             });
             
             // Makes clicking a marker scroll to the post.

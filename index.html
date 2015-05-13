@@ -44,7 +44,7 @@
                         <p>Special Features: <%= row.special %><p>
                     <% } %>
                     <p>
-                        <%= row.address %>
+                        <a target="_blank" href="https://www.google.com/maps/place/<%= row.address.replace(" ", "+") %>"><%= row.address %></a>
                     </p>      
                     <div class="footer"></div>
             </div>
@@ -52,7 +52,7 @@
     </script> 
     
     <header id="feature-head">
-        <h1>Los Angeles Libraries / Title Here</h1>
+        <h1>Los Angeles Libraries</h1>
         <p>Book papers crinkle while their pages turn under the hands of the expert or casual reader. The sounds of cars driving or Angelenos talking are audible but muted by the insulated walls, humming quietly. People type away at computers, whisper to their friends, take a sip of coffee.</p>
         <p>Beyond the hallowed halls and shelves of Powell Library, past the continual chaos of Westwood’s Starbucks, across that jungle known as Wilshire Boulevard, libraries all over the city lie waiting for students to call home – at least for a few hours.</p>
         <p>Unlike some colleges, where students are limited to only their campus resources, UCLA’s prime Los Angeles real estate means students have access to dozens of public libraries, varying in size, sound, location and aesthetic.</p>
