@@ -1,6 +1,7 @@
 var data;
 var place_array;
 var xoffset = 0;
+var spreadsheet_url = "https://spreadsheets.google.com/feeds/list/1NNpOjxrhXcbXVgP9hCptv8Vtj8mztB91gUzX5U6sAAM/1/public/values?alt=json";
 $(document).ready(function(){
     var mediaQuery = window.matchMedia('all and (max-width: 582px)');
  
@@ -8,8 +9,7 @@ $(document).ready(function(){
     // Geocoding the locations (getting lat/lng from the common location name) is asynchronous
     // so we need to do a callback.  Put everything that depends on the map and place divs in
     // the callback() function below.
-    url = "https://spreadsheets.google.com/feeds/list/1NNpOjxrhXcbXVgP9hCptv8Vtj8mztB91gUzX5U6sAAM/1/public/values?alt=json"
-	$.getJSON(url, function(json){
+	$.getJSON(spreadsheet_url, function(json){
         data = clean_google_sheet_json(json);
         modify_and_compile(data, callback);
 	});
@@ -42,20 +42,10 @@ $(document).ready(function(){
         };
         var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
         map.panBy(xoffset, 0);
-       
-        // Create waypoints that move the map to the marker when page is scrolled.
-        var waypoints = $('.place').waypoint({
-          handler: function(direction) {
-            var latlng = new google.maps.LatLng(parseFloat(this.element.attributes[2].value), parseFloat(this.element.attributes[3].value));
-            //map.panTo(latlng);
-            //map.panBy(-225.5, 0);
-            map.panToWithOffset(latlng, xoffset, 0);
-          },
-          offset: '50%'
-        })
         
-        // Create markers for each place.
+        // Create markers and waypoints for each place.
         var places_array = $('.place');
+        var waypoint_array = [];
         $.each(places_array, function(i, place) {
             var latlng = new google.maps.LatLng(parseFloat($('#place' + (i + 1)).attr('data-latitude')), parseFloat($('#place' + (i + 1)).attr('data-longitude')));
             
@@ -77,6 +67,18 @@ $(document).ready(function(){
                     scrollTop: $("#place" + (i+1)).offset().top
                 }, scrolltime);
             });
+            
+            waypoint_array[i] = (function(latlng) {
+                var waypoint = new Waypoint({
+                    element: document.getElementById('place' + (i+1)),
+                    handler: function() {
+                        map.panToWithOffset(latlng, xoffset, 0);
+                    },
+                  offset: '50%'
+
+                }); 
+                return waypoint;
+            })(latlng);
         });
     }
  

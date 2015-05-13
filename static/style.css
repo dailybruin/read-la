@@ -1,12 +1,11 @@
 #feature-head {
-    background-color: black;  /* khaki */
-    color: snow;
+    background-color: white;
+    color: black;
     box-sizing: border-box;
     margin: 0;
     padding: 30px;
     overflow: hidden;
     min-height: 100%;
-    background: url('texture.png');
 }
 
 #feature-head p {
@@ -17,7 +16,7 @@
 }
 
 p {
-    font: 1em "Helvetica";
+    font: 1em "Oxygen", sans-serif;
 }
 
 h1 {
@@ -32,7 +31,7 @@ h1 {
     position: relative;
     display: block;
     width: 60%;
-    max-width: 485px;
+    max-width: 530px;
     margin-top: 50px;
     margin-bottom: 50px;
 }
@@ -43,16 +42,9 @@ h1 {
     padding: 5px 20px 20px 20px;
     box-sizing: border-box;
     box-shadow: 6px 9px 17px -2px rgba(0,0,0,0.6);
-    border-radius: 10px;
-    background: url('texture.png');
-    color: white;
+    background-color: white;
+    
 }
-
-/*
-.place-id-num {
-    color: white;
-}
-*/
 
 .place .place-img {
     margin: 0 -20px 30px;
