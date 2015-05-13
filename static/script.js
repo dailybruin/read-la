@@ -20,7 +20,6 @@ $(document).ready(function(){
 
         if (mediaQuery.matches) {
             xoffset = 0;
-            console.log("TRUE");
         }
         else {
             xoffset = -((window.innerWidth / 2) - (window.innerWidth - $("#container").width()) / 2);
@@ -46,8 +45,10 @@ $(document).ready(function(){
         // Create markers and waypoints for each place.
         var places_array = $('.place');
         var waypoint_array = [];
+        var latlng_array = [];
         $.each(places_array, function(i, place) {
             var latlng = new google.maps.LatLng(parseFloat($('#place' + (i + 1)).attr('data-latitude')), parseFloat($('#place' + (i + 1)).attr('data-longitude')));
+            latlng_array[i] = latlng;
             
             var icon = {
                 url: "static/icon" + (i+1) + ".png", // url
@@ -65,9 +66,10 @@ $(document).ready(function(){
             // Makes clicking a marker scroll to the post.
             var scrolltime = 500;
             google.maps.event.addListener(marker, 'click', function () {
+                // Must disable and then renable waypoints or else there will 
+                // be a lot of jumping back and forth on the map as we scroll past
+                // all of the divs.
                 Waypoint.disableAll();
-                //map.panTo(latlng);
-                //map.panBy(-225.5, 0);
                 map.panToWithOffset(latlng, xoffset, 0);
                 setTimeout(function(){ Waypoint.enableAll();}, scrolltime);
                 $('html, body').animate({
@@ -78,11 +80,15 @@ $(document).ready(function(){
             waypoint_array[i] = (function(latlng) {
                 var waypoint = new Waypoint({
                     element: document.getElementById('place' + (i+1)),
-                    handler: function() {
-                        map.panToWithOffset(latlng, xoffset, 0);
+                    handler: function(direction) {
+                        if (direction == "down") {
+                            map.panToWithOffset(latlng, xoffset, 0);
+                        }
+                        else if (direction == "up" && 0 < i){
+                            map.panToWithOffset(latlng_array[i-1], xoffset, 0);
+                        }
                     },
                   offset: '50%'
-
                 }); 
                 return waypoint;
             })(latlng);
