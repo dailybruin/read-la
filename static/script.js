@@ -163,7 +163,6 @@ $(document).ready(function(){
         } else {        
             // Todo: account for margins
             if( $(this).scrollTop() > header.height() + header.padding('top') + header.padding('bottom')) {  
-                console.log($(this).scrollTop());
                 mapDiv.css({
                     "max-height": "",
                     "height": "",                
