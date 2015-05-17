@@ -1,19 +1,53 @@
-#feature-head {
-    background-color: white;
-    color: black;
+header {
     box-sizing: border-box;
     margin: 0;
-    padding: 30px;
-    overflow: hidden;
-    min-height: 100%;
+    position: relative;
+    padding-top: 100px;
+    
+    background-image:  url("/static/libraries/web.prime.libraries.BevHills.3.AD.jpg");
+    background-repeat: no-repeat;
+    background-size:   cover; 
+    background-position: center 0;
 }
 
-#feature-head p {
+header section {
+    margin-left: auto;
+    margin-right: auto;
+    background: linear-gradient(transparent,  black);
+}
+
+header #title {
+    width: 60%;
+    max-width: 400px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#byline {
+    text-align: center;    
+    color: white;
+    font-weight: bold;
+    font-size: 1.5em;
+}
+
+header section #intro_text {
+    padding-top: 30px;
+    padding-bottom: 16px;
+}
+
+header section p {
     width: 95%;
     max-width: 720px;
     margin-left: auto;
     margin-right: auto;
+    color: white;
 }
+
+body {
+    background-color: #7f3f98;
+}
+
 
 p {
     font: 1em "Oxygen", sans-serif;

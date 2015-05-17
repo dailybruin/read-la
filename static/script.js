@@ -163,6 +163,7 @@ $(document).ready(function(){
         } else {        
             // Todo: account for margins
             if( $(this).scrollTop() > header.height() + header.padding('top') + header.padding('bottom')) {  
+                console.log($(this).scrollTop());
                 mapDiv.css({
                     "max-height": "",
                     "height": "",                
@@ -271,6 +272,26 @@ $.fn.padding = function (direction) {
         // do unit conversion from em to px...
     }
 }
+/*
+$.fn.margin = function (direction) {
+    
+    var margin = this.css("margin-" + direction);
+    var num = margin.match(/[0-9]+/)[0];
+    var unit = margin.match(/[a-zA-Z]+/)[0];
+    
+    // No margin
+    if (num === "") {
+        return 0;
+    }
+    
+    if (unit === "px") {
+        return parseInt(margin);
+    }
+    else {
+        // do unit conversion from em to px...
+    }
+}
+*/
 
 //pantowithoffset function
 google.maps.Map.prototype.panToWithOffset = function(latlng, offsetX, offsetY) {
