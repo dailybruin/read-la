@@ -4,7 +4,7 @@ header {
     position: relative;
     padding-top: 100px;
     
-    background-image:  url("/static/libraries/web.prime.libraries.BevHills.3.AD.jpg");
+    background-image:  url("libraries/web.prime.libraries.BevHills.3.AD.jpg");
     background-repeat: no-repeat;
     background-size:   cover; 
     background-position: center 0;
