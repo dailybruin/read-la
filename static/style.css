@@ -13,7 +13,7 @@ header {
 header section {
     margin-left: auto;
     margin-right: auto;
-    background: linear-gradient(transparent,  black);
+    background: linear-gradient(transparent,  rgb(18, 4, 23));
 }
 
 header #title {

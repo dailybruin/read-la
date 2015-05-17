@@ -123,8 +123,12 @@ $(document).ready(function(){
                     }
                 });
                 
+                if (mediaQuery.matches) {
+                    console.log("YES");
+                    map_offset = $('#map-canvas').height();  // Scroll past the map fixed at the top of the screen so banner gets put right under the map
+                }
                 $('html, body').animate({
-                    scrollTop: $("#place" + (i+1)).offset().top
+                    scrollTop: $("#place" + (i+1)).offset().top - map_offset + 25  // TODO: account for padding dynamically
                 }, scrolltime);
             });
         });
