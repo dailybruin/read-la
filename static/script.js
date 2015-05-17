@@ -46,36 +46,37 @@ $(document).ready(function(){
         var places_array = $('.place');
         var waypoint_array = [];
         var latlng_array = [];
+        var marker_array = [];
+        var unfocused_icons = [];
+        var focused_icons = [];
         $.each(places_array, function(i, place) {
             var latlng = new google.maps.LatLng(parseFloat($('#place' + (i + 1)).attr('data-latitude')), parseFloat($('#place' + (i + 1)).attr('data-longitude')));
             latlng_array[i] = latlng;
             
-            var icon = {
-                url: "static/icon" + (i+1) + ".png", // url
-                scaledSize: new google.maps.Size(80, 59), // scaled size
-                origin: new google.maps.Point(0, 0), // origin
-                anchor: new google.maps.Point(0, 50) // anchor
+            var icon_height = 70;
+            var icon_width  = 58;
+            unfocused_icons[i] = {
+                url: "static/unfocused_icon" + (i+1) + ".png",               // url
+                scaledSize: new google.maps.Size(icon_width, icon_height),   // scaled size
+                origin: new google.maps.Point(0, 0),                         // origin
+                anchor: new google.maps.Point(0, (icon_width)/2)            // anchor
             };
-            var marker = new google.maps.Marker({
-                position: latlng,
+            
+            focused_icons[i] = {
+                url: "static/focused_icon" + (i+1) + ".png",
+                scaledSize: new google.maps.Size(icon_width*1.25, icon_height*1.25), // scaled size
+                origin: new google.maps.Point(0, 0), // origin
+                anchor: new google.maps.Point(0, (icon_width*1.25)/2) // anchor
+            };
+            
+            marker_array[i] = new google.maps.Marker({
+                position: latlng_array[i],
                 map: map,
                 title: (i + 1).toString(),
-                icon: icon
+                icon: unfocused_icons[i]
             });
             
-            // Makes clicking a marker scroll to the post.
-            var scrolltime = 500;
-            google.maps.event.addListener(marker, 'click', function () {
-                // Must disable and then renable waypoints or else there will 
-                // be a lot of jumping back and forth on the map as we scroll past
-                // all of the divs.
-                Waypoint.disableAll();
-                map.panToWithOffset(latlng, xoffset, 0);
-                setTimeout(function(){ Waypoint.enableAll();}, scrolltime);
-                $('html, body').animate({
-                    scrollTop: $("#place" + (i+1)).offset().top
-                }, scrolltime);
-            });
+
             
             waypoint_array[i] = (function(latlng) {
                 var waypoint = new Waypoint({
@@ -83,9 +84,17 @@ $(document).ready(function(){
                     handler: function(direction) {
                         if (direction == "down") {
                             map.panToWithOffset(latlng, xoffset, 0);
+                            marker_array[i].setIcon(focused_icons[i]);
+                            
+                            if (0 < i) {  // Any marker besides the first one.
+                                marker_array[i-1].setIcon(unfocused_icons[i-1]);
+                            }
                         }
                         else if (direction == "up" && 0 < i){
                             map.panToWithOffset(latlng_array[i-1], xoffset, 0);
+                            marker_array[i-1].setIcon(focused_icons[i-1]);
+
+                            marker_array[i].setIcon(unfocused_icons[i]);
                         }
                     },
                   offset: '50%'
@@ -93,6 +102,34 @@ $(document).ready(function(){
                 return waypoint;
             })(latlng);
         });
+        
+        $.each(places_array, function(i, place) {
+            // Makes clicking a marker scroll to the post.
+            var scrolltime = 500;
+            google.maps.event.addListener(marker_array[i], 'click', function () {
+                // Must disable and then renable waypoints or else there will 
+                // be a lot of jumping back and forth on the map as we scroll past
+                // all of the divs.
+                Waypoint.disableAll();
+                map.panToWithOffset(latlng_array[i], xoffset, 0);
+                setTimeout(function(){ Waypoint.enableAll();}, scrolltime);
+                
+                marker_array.forEach(function(marker, j) {
+                    if (j == i) {
+                        marker_array[j].setIcon(focused_icons[j]);
+                    }
+                    else {
+                        marker_array[j].setIcon(unfocused_icons[j]);
+                    }
+                });
+                
+                $('html, body').animate({
+                    scrollTop: $("#place" + (i+1)).offset().top
+                }, scrolltime);
+            });
+        });
+        
+        
     }
  
     
