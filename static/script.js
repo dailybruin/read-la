@@ -123,6 +123,7 @@ $(document).ready(function(){
                     }
                 });
                 
+                var map_offset = 0;
                 if (mediaQuery.matches) {
                     console.log("YES");
                     map_offset = $('#map-canvas').height();  // Scroll past the map fixed at the top of the screen so banner gets put right under the map
