@@ -34,6 +34,7 @@ header #title {
 header section #intro_text {
     padding-top: 30px;
     padding-bottom: 16px;
+    text-align: justify;
 }
 
 header section p {
