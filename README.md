@@ -1,3 +1,3 @@
-# prime-libraries
+# read-la
 
-Live demo here:  http://daily-bruin.github.io/prime-libraries/
+Live demo here:  http://daily-bruin.github.io/read-la/
