@@ -2,12 +2,27 @@ header {
     box-sizing: border-box;
     margin: 0;
     position: relative;
-    padding-top: 100px;
+    padding-top: 30px;
     
     background-image:  url("libraries/web.prime.libraries.BevHills.3.AD.jpg");
     background-repeat: no-repeat;
     background-size:   cover; 
     background-position: center 0;
+}
+
+#return_link {
+    padding: 10px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    color: white;
+      transition: all, 1s, ease;
+}
+
+#return_link:hover {
+  text-decoration: none;
+  color: black;
+  background-color: rgba(255,255,255,1.0);
 }
 
 header section {
@@ -18,7 +33,7 @@ header section {
 
 header #title {
     width: 60%;
-    max-width: 400px;
+    max-width: 300px;
     display: block;
     margin-left: auto;
     margin-right: auto;
@@ -28,11 +43,11 @@ header #title {
     text-align: center;    
     color: white;
     font-weight: bold;
-    font-size: 1.5em;
+    font-size: 1em;
 }
 
 header section #intro_text {
-    padding-top: 30px;
+    padding-top: 15px;
     padding-bottom: 16px;
     text-align: justify;
 }
